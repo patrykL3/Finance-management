@@ -2,11 +2,11 @@
 
 
 void FinanceManagement::addIncome() {
-    financeManager -> addIncome();
+    //financeManager -> addIncome();
 }
 
 void FinanceManagement::addExpense() {
-    financeManager -> addExpense();
+    //financeManager -> addExpense();
 }
 
 void FinanceManagement::displayBudgetBalanceForTheCurrentMonth() {
@@ -31,8 +31,8 @@ void FinanceManagement::changePasswordLoggedUser() {
 
 void FinanceManagement::logOutUser() {
     userManager.logOutUser();
-    delete adresatMenager;
-    adresatMenager = NULL;
+    //delete financeManager;
+    //financeManager = NULL;
 }
 
 char FinanceManagement::selectOptionFromMainMenu() {
@@ -51,7 +51,7 @@ char FinanceManagement::selectOptionFromMainMenu() {
     cout << "7. Wyloguj sie" << endl;
     cout << "---------------------------" << endl;
     cout << "Twoj wybor: ";
-    choice = AuxiliaryMethods::loadSign();
+    choice = AuxiliaryMethods::loadCharacter();
 
     return choice;
 }
@@ -62,8 +62,8 @@ void FinanceManagement::userRegistration() {
 
 void FinanceManagement::userLogin() {
     userManager.userLogin();
-    if (userManager.isLogged())
-        financeManager = new FinanceManager(FILE_NAME_WITH_INCOMES, FILE_NAME_WITH_EXPENSES, userManager.getIdLoggedUser());
+    //if (userManager.isLogged())
+      //  financeManager = new FinanceManager(FILE_NAME_WITH_INCOMES, FILE_NAME_WITH_EXPENSES, userManager.getIdLoggedUser());
 }
 
 bool FinanceManagement::isLogged() {
@@ -84,7 +84,7 @@ char FinanceManagement::selectOptionFromLoginMenu() {
     cout << "9. Koniec programu" << endl;
     cout << "---------------------------" << endl;
     cout << "Twoj wybor: ";
-    choice = AuxiliaryMethods::loadSign();
+    choice = AuxiliaryMethods::loadCharacter();
 
     return choice;
 }

@@ -2,6 +2,7 @@
 #define FINANCE_MANAGEMENT_H
 
 #include <iostream>
+#include"UserManager.h"
 #include"AuxiliaryMethods.h"
 
 using namespace std;
@@ -10,7 +11,7 @@ using namespace std;
 class FinanceManagement {
 
     UserManager userManager;
-    FinanceManager *financeManager;
+    //FinanceManager *financeManager;
     const string FILE_NAME_WITH_INCOMES;
     const string FILE_NAME_WITH_EXPENSES;
 
@@ -18,11 +19,11 @@ public:
 
     FinanceManagement(string fileNameWithUsers, string fileNameWithIncomes, string fileNameWithExpenses)
         : userManager(fileNameWithUsers), FILE_NAME_WITH_INCOMES(fileNameWithIncomes), FILE_NAME_WITH_EXPENSES(fileNameWithExpenses) {
-        financeManager = NULL;
+        //financeManager = NULL;
     };
     ~FinanceManagement() {
-        delete financeManager;
-        financeManager = NULL;
+        //delete financeManager;
+        //financeManager = NULL;
     }
 
     bool isLogged();
