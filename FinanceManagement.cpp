@@ -6,7 +6,7 @@ void FinanceManagement::addIncome() {
 }
 
 void FinanceManagement::addExpense() {
-    //financeManager -> addExpense();
+    financeManager -> addExpense();
 }
 
 void FinanceManagement::displayBudgetBalanceForTheCurrentMonth() {
@@ -31,8 +31,8 @@ void FinanceManagement::changePasswordLoggedUser() {
 
 void FinanceManagement::logOutUser() {
     userManager.logOutUser();
-    //delete financeManager;
-    //financeManager = NULL;
+    delete financeManager;
+    financeManager = NULL;
 }
 
 char FinanceManagement::selectOptionFromMainMenu() {
@@ -63,7 +63,7 @@ void FinanceManagement::userRegistration() {
 void FinanceManagement::userLogin() {
     userManager.userLogin();
     if (userManager.isLogged())
-        financeManager = new FinanceManager(FILE_NAME_WITH_INCOMES, userManager.getIdLoggedUser());//, FILE_NAME_WITH_EXPENSES, userManager.getIdLoggedUser());
+        financeManager = new FinanceManager(FILE_NAME_WITH_INCOMES, userManager.getIdLoggedUser(), FILE_NAME_WITH_EXPENSES);
 }
 
 bool FinanceManagement::isLogged() {

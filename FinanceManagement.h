@@ -18,8 +18,8 @@ class FinanceManagement {
 
 public:
 
-    FinanceManagement(string fileNameWithUsers, string fileNameWithIncomes)//, string fileNameWithExpenses)
-        : userManager(fileNameWithUsers), FILE_NAME_WITH_INCOMES(fileNameWithIncomes) {//, FILE_NAME_WITH_EXPENSES(fileNameWithExpenses) {
+    FinanceManagement(string fileNameWithUsers, string fileNameWithIncomes, string fileNameWithExpenses)
+        : userManager(fileNameWithUsers), FILE_NAME_WITH_INCOMES(fileNameWithIncomes), FILE_NAME_WITH_EXPENSES(fileNameWithExpenses) {
         financeManager = NULL;
     };
     ~FinanceManagement() {

@@ -12,6 +12,67 @@ void FinanceManager::displayBudgetBalanceForTheCurrentMonth() {
     system("pause");
 }
 
+
+void FinanceManager::addExpense() {
+    Expense expense = provideDataOfNewExpense();
+
+    expenses.push_back(expense);
+    fileWithExpenses.addExpenseToFile(expense);
+
+    cout << endl << "Nowy wydatek zostal dodany" << endl << endl;
+    system("pause");
+}
+
+Expense FinanceManager::provideDataOfNewExpense() {
+    Expense expense;
+    char choiceCharacter;
+
+    expense.setExpenseId(getNewExpenseId());
+    expense.setUserId(LOGGED_USER_ID);
+
+    string date = "";
+    cout << "Czy chcesz wprowadzic wydatek z dzisiejsza data? ('t'- tak, 'n'- nie): ";
+    choiceCharacter = AuxiliaryMethods::loadCharacter();
+    if (choiceCharacter == 't') {
+        expense.setDate(dateManager.getTodaysDateInIntFormat());
+    } else {
+        do {
+            cout << "Wprowadz date wydatku (format rrrr-mm-dd): ";
+            date = AuxiliaryMethods::loadLine();
+            if (!dateManager.isDateCorrect(date)) {
+                cout << "Data nieprawidlowa. Poprawny format daty: rrrr-mm-dd. Zakres daty od 2000-01-01 do ostatniego dnia biezacego miesiaca." << endl;
+                system("pause");
+            }
+        } while (!dateManager.isDateCorrect(date));
+        expense.setDate(dateManager.convertStringDateToIntDate(date));
+    }
+
+    string item;
+    cout << "Wprowadz typ wydatku: ";
+    item = AuxiliaryMethods::loadLine();
+    expense.setItem(item);
+
+    string amount;
+    do {
+        cout << "Jaka jest wartosc wydatku? : ";
+        cin >> amount;
+        AuxiliaryMethods::replaceCommasWithPeriods(amount);
+        if (AuxiliaryMethods::convertStringToFloat(amount) <= 0) {
+            cout << "Wydatek musi byc liczba wieksza od 0!" << endl;
+            system("pause");
+        }
+    } while (AuxiliaryMethods::convertStringToFloat(amount) <= 0);
+    expense.setAmount(AuxiliaryMethods::convertStringToFloat(amount));
+    return expense;
+}
+
+int FinanceManager::getNewExpenseId() {
+    int newExpenseId = fileWithExpenses.getLastExpenseId() + 1;
+
+    return newExpenseId;
+}
+
+
 void FinanceManager::addIncome() {
     Income income = provideDataOfNewIncome();
 
