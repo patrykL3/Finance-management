@@ -6,7 +6,7 @@ using namespace std;
 
 
 int main() {
-    FinanceManagement financeManagement("users.xml", "incomes.xml", "expenses.xml");
+    FinanceManagement financeManagement("users.xml", "incomes.xml");//, "expenses.xml");
     char choice;
 
     while (true) {

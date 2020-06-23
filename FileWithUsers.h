@@ -18,6 +18,7 @@ class FileWithUsers:private XmlFile {
 public:
 
     FileWithUsers(string fileNameWithUsers) : XmlFile(fileNameWithUsers) {};
+
     void addUserToFile(User user);
     void editUsersPasswordInFile(User user);
     vector <User> loadUsersFromFile();

@@ -1,6 +1,21 @@
 #include "AuxiliaryMethods.h"
 
 
+void AuxiliaryMethods::replaceCommasWithPeriods(string &data) {
+    for(int i = 0; i < data.length(); ++i) {
+        if(data[i] == ',')
+            data.replace(i, 1, ".");
+    }
+}
+
+float AuxiliaryMethods::convertStringToFloat(string number) {
+    float numberFloat;
+    istringstream iss(number);
+    iss >> numberFloat;
+
+    return numberFloat;
+}
+
 int AuxiliaryMethods::convertStringToInt(string number) {
     int numberInt;
     istringstream iss(number);
@@ -10,6 +25,13 @@ int AuxiliaryMethods::convertStringToInt(string number) {
 }
 
 string AuxiliaryMethods::convertIntToString(int number) {
+    ostringstream ss;
+    ss << number;
+    string str = ss.str();
+    return str;
+}
+
+string AuxiliaryMethods::convertFloatToString(float number) {
     ostringstream ss;
     ss << number;
     string str = ss.str();

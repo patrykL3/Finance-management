@@ -21,8 +21,12 @@ void XmlFile::resetPosition() {
     cMarkupXml.ResetPos();
 }
 
-void XmlFile::saveFile(string fileName) {
-    cMarkupXml.Save(fileName);
+void XmlFile::resetChildPosition() {
+    cMarkupXml.ResetChildPos();
+}
+
+void XmlFile::saveFile() {
+    cMarkupXml.Save(FILE_NAME);
 }
 
 void XmlFile::findElement() {
@@ -45,10 +49,14 @@ void XmlFile::addElement(string tagName, string data) {
     cMarkupXml.AddElem(tagName, data);
 }
 
-bool XmlFile::fileExists(string fileName) {
-    return cMarkupXml.Load(fileName);
+void XmlFile::addElement(string tagName, int data) {
+    cMarkupXml.AddElem(tagName, data);
 }
 
+bool XmlFile::fileExists() {
+    return cMarkupXml.Load(FILE_NAME);
+}
+/*
 void XmlFile::deleteFile(string fileName) {
 
     if (remove(fileName.c_str()) == 0) {}
@@ -71,3 +79,4 @@ bool XmlFile::isEmpty(fstream &xmlFile) {
     else
         return false;
 }
+*/

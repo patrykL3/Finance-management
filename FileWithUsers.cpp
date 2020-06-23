@@ -2,27 +2,27 @@
 
 
 void FileWithUsers::addUserToFile(User user) {
-    if(!fileExists(FILE_NAME)) {
+    if(!fileExists()) {
         addElement("Users");
     }
     findElement();
     intoElement();
     addElement("User");
     intoElement();
-    addElement("UserId", AuxiliaryMethods::convertIntToString(user.getId()));
+    addElement("UserId", user.getId());
     addElement("Login", user.getLogin());
     addElement("Password", user.getPassword());
     addElement("Name", user.getName());
     addElement("Surname", user.getSurname());
 
-    saveFile(FILE_NAME);
+    saveFile();
 }
 
 vector <User> FileWithUsers::loadUsersFromFile() {
     User user;
     vector <User> users;
 
-    if(fileExists(FILE_NAME)) {
+    if(fileExists()) {
         resetPosition();
         findElement("Users");
         intoElement();
@@ -46,7 +46,7 @@ vector <User> FileWithUsers::loadUsersFromFile() {
 }
 
 void FileWithUsers::editUsersPasswordInFile(User user) {
-    if(fileExists(FILE_NAME)) {
+    if(fileExists()) {
         findElement("Users");
         intoElement();
 
@@ -58,6 +58,6 @@ void FileWithUsers::editUsersPasswordInFile(User user) {
             }
         }
     }
-    saveFile(FILE_NAME);
+    saveFile();
 }
 

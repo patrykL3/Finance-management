@@ -13,8 +13,11 @@ public:
 
     static char loadCharacter();
     static string loadLine();
+    static float convertStringToFloat(string number);
     static string convertIntToString(int number);
+    static string convertFloatToString(float number);
     static int convertStringToInt(string number);
+    static void replaceCommasWithPeriods(string &data);
     /*static string pobierzLiczbe(string tekst, int pozycjaZnaku);
 
     static int wczytajLiczbeCalkowita();*/
