@@ -15,12 +15,12 @@ void FinanceManagement::displayBudgetBalanceForTheCurrentMonth() {
 }
 
 void FinanceManagement::displayBudgetBalanceForThePreviousMonth() {
-    //financeManager -> displayBudgetBalanceForThePreviousMonth();
+   financeManager -> displayBudgetBalanceForThePreviousMonth();
 
 }
 
 void FinanceManagement::displayBudgetBalanceForThePeriod() {
-    //financeManager -> displayBudgetBalanceForThePeriod();
+    financeManager -> displayBudgetBalanceForThePeriod();
 
 }
 

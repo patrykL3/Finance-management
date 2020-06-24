@@ -1,16 +1,202 @@
 #include "FinanceManager.h"
 
+void FinanceManager::displayBalance(float sumOfIncomes, float sumOfExpenses) {
+    float sumOfCashFlow = sumOfIncomes - sumOfExpenses;
 
-void FinanceManager::displayBudgetBalanceForTheCurrentMonth() {
-    for(int i = 0; i < incomes.size(); ++i) {
-        cout << "incomeId: " <<incomes[i].getIncomeId() << endl;
-        cout << "userId: " <<incomes[i].getUserId() << endl;
-        cout << "date: " <<incomes[i].getDate() << endl;
-        cout << "amount: " <<incomes[i].getAmount() << endl;
-        cout << "item: " <<incomes[i].getItem() << endl << endl;
+    cout << "Suma przychodow: " << sumOfIncomes << " zl" << endl;
+    cout << "Suma wydatkow:   " << sumOfExpenses << " zl" << endl;
+    cout << "Bilans:          " << sumOfCashFlow << " zl" << endl << endl;
+}
+
+void FinanceManager::displayDataExpense(Expense expense) {
+    cout << "Id :    " << expense.getExpenseId() << endl;
+    cout << "Data:   " << dateManager.convertIntDateToStringDate(expense.getDate()) << endl;
+    cout << "Typ:    " << expense.getItem() << endl;
+    cout << "Kwota:  " << expense.getAmount() << " zl" << endl << endl;
+}
+
+void FinanceManager::displayDataIncome(Income income) {
+    cout << "Id:     " << income.getIncomeId() << endl;
+    cout << "Data:   " << dateManager.convertIntDateToStringDate(income.getDate()) << endl;
+    cout << "Typ:    " << income.getItem() << endl;
+    cout << "Kwota:  " << income.getAmount() << " zl" << endl << endl;
+}
+
+string FinanceManager::enterBeginBalanceDate() {
+    string beginBalanceDate = "";
+
+    do {
+        cout << "Wprowadz date poczatku okresu bilansu (format rrrr-mm-dd): ";
+        beginBalanceDate = AuxiliaryMethods::loadLine();
+        if (!dateManager.isDateCorrect(beginBalanceDate)) {
+            cout << "Data nieprawidlowa. Poprawny format daty: rrrr-mm-dd. Zakres daty od 2000-01-01 do ostatniego dnia biezacego miesiaca." << endl;
+            system("pause");
+        }
+    } while (!dateManager.isDateCorrect(beginBalanceDate));
+
+    return beginBalanceDate;
+}
+
+string FinanceManager::enterEndBalanceDate() {
+    string endBalanceDate = "";
+
+    do {
+        cout << "Wprowadz date konca okresu bilansu (format rrrr-mm-dd): ";
+        endBalanceDate = AuxiliaryMethods::loadLine();
+        if (!dateManager.isDateCorrect(endBalanceDate)) {
+            cout << "Data nieprawidlowa. Poprawny format daty: rrrr-mm-dd. Zakres daty od 2000-01-01 do ostatniego dnia biezacego miesiaca." << endl;
+            system("pause");
+        }
+    } while (!dateManager.isDateCorrect(endBalanceDate));
+
+    return endBalanceDate;
+}
+
+void FinanceManager::displayBudgetBalanceForThePeriod() {
+    float sumOfIncomes = 0;
+    float sumOfExpenses = 0;
+    string beginBalanceDate = enterBeginBalanceDate();
+    string endBalanceDate = enterEndBalanceDate();
+
+    system("cls");
+    cout << "    >>> BILANS PRZYCHODOW / WYDATKOW <<<" << endl;
+    cout << "-----------------------------------------------" << endl << endl;
+    cout << "  PRZYCHODY:" << endl << endl;
+    if (!incomes.empty()) {
+        sort(incomes.begin(), incomes.end());
+        for(int i = 0; i < incomes.size(); ++i) {
+            if(incomes[i].getDate() >=  dateManager.convertStringDateToIntDate(beginBalanceDate) && incomes[i].getDate() <=  dateManager.convertStringDateToIntDate(endBalanceDate)) {
+                displayDataIncome(incomes[i]);
+                sumOfIncomes += incomes[i].getAmount();
+            }
+        }
+        cout << endl;
+    } if(sumOfIncomes == 0) {
+        cout << endl << "BRAK PRZYCHODOW." << endl << endl;
     }
+
+    if (!expenses.empty()) {
+        sort(expenses.begin(), expenses.end());
+        cout << "  WYDATKI:" << endl << endl;
+        for(int i = 0; i < expenses.size(); ++i) {
+            if(expenses[i].getDate() >=  dateManager.convertStringDateToIntDate(beginBalanceDate) && expenses[i].getDate() <=  dateManager.convertStringDateToIntDate(endBalanceDate)) {
+                displayDataExpense(expenses[i]);
+                sumOfExpenses += expenses[i].getAmount();
+            }
+        }
+        cout << endl;
+    }
+
+    if(sumOfExpenses == 0) {
+        cout << endl << "BRAK WYDATKOW." << endl << endl;
+    }
+
+    displayBalance(sumOfIncomes, sumOfExpenses);
     system("pause");
 }
+
+void FinanceManager::displayBudgetBalanceForTheMonth(int yearOfTheBalanceMonth, int monthBalance) {
+    float sumOfIncomes = 0;
+    float sumOfExpenses = 0;
+
+    system("cls");
+    cout << "    >>> BILANS PRZYCHODOW / WYDATKOW <<<" << endl;
+    cout << "-----------------------------------------------" << endl << endl;
+    cout << "  PRZYCHODY:" << endl << endl;
+    if (!incomes.empty()) {
+        sort(incomes.begin(), incomes.end());
+        for(int i = 0; i < incomes.size(); ++i) {
+            if(dateManager.getYearFromIntDate(incomes[i].getDate()) == yearOfTheBalanceMonth && dateManager.getMonthFromIntDate(incomes[i].getDate()) == monthBalance) {
+                displayDataIncome(incomes[i]);
+                sumOfIncomes += incomes[i].getAmount();
+            }
+        }
+        cout << endl;
+    } if(sumOfIncomes == 0) {
+        cout << endl << "BRAK PRZYCHODOW." << endl << endl;
+    }
+
+    if (!expenses.empty()) {
+        sort(expenses.begin(), expenses.end());
+        cout << "  WYDATKI:" << endl << endl;
+        for(int i = 0; i < expenses.size(); ++i) {
+            if(dateManager.getYearFromIntDate(expenses[i].getDate()) == yearOfTheBalanceMonth && dateManager.getMonthFromIntDate(expenses[i].getDate()) == monthBalance) {
+                displayDataExpense(expenses[i]);
+                sumOfExpenses += expenses[i].getAmount();
+            }
+        }
+        cout << endl;
+    }
+    if(sumOfExpenses == 0) {
+        cout << endl << "BRAK WYDATKOW." << endl << endl;
+    }
+
+    displayBalance(sumOfIncomes, sumOfExpenses);
+    system("pause");
+}
+
+void FinanceManager::displayBudgetBalanceForTheCurrentMonth() {
+    int yearOfTheBalanceMonth = dateManager.getCurrentYear();
+    int monthBalance = dateManager.getCurrentMonth();
+
+    displayBudgetBalanceForTheMonth(yearOfTheBalanceMonth, monthBalance);
+}
+
+void FinanceManager::displayBudgetBalanceForThePreviousMonth() {
+    int yearOfTheBalanceMonth = 0;
+    int monthBalance = 0;
+
+    if(dateManager.getCurrentMonth() == 1) {
+        yearOfTheBalanceMonth = dateManager.getCurrentYear() - 1;
+        monthBalance = 12;
+    } else {
+    yearOfTheBalanceMonth = dateManager.getCurrentYear();
+    monthBalance = dateManager.getCurrentMonth() - 1;
+    }
+
+    displayBudgetBalanceForTheMonth(yearOfTheBalanceMonth, monthBalance);
+}
+/*
+void FinanceManager::displayBudgetBalanceForTheCurrentMonth() {
+    float sumOfIncomes = 0;
+    float sumOfExpenses = 0;
+
+    system("cls");
+    cout << "    >>> BILANS PRZYCHODOW / WYDATKOW <<<" << endl;
+    cout << "-----------------------------------------------" << endl << endl;
+    cout << "  PRZYCHODY:" << endl << endl;
+    if (!incomes.empty()) {
+        sort(incomes.begin(), incomes.end());
+        for(int i = 0; i < incomes.size(); ++i) {
+            if(dateManager.getYearFromIntDate(incomes[i].getDate()) == dateManager.getCurrentYear() && dateManager.getMonthFromIntDate(incomes[i].getDate()) == dateManager.getCurrentMonth()) {
+                displayDataIncome(incomes[i]);
+                sumOfIncomes += incomes[i].getAmount();
+            }
+        }
+        cout << endl;
+    } else {
+        cout << endl << "BRAK PRZYCHODOW." << endl << endl;
+    }
+
+    if (!expenses.empty()) {
+        sort(expenses.begin(), expenses.end());
+        cout << "  WYDATKI:" << endl << endl;
+        for(int i = 0; i < expenses.size(); ++i) {
+            if(dateManager.getYearFromIntDate(expenses[i].getDate()) == dateManager.getCurrentYear() && dateManager.getMonthFromIntDate(expenses[i].getDate()) == dateManager.getCurrentMonth()) {
+                displayDataExpense(expenses[i]);
+                sumOfExpenses += expenses[i].getAmount();
+            }
+        }
+        cout << endl;
+    } else {
+        cout << endl << "BRAK WYDATKOW." << endl << endl;
+    }
+
+    displayBalance(sumOfIncomes, sumOfExpenses);
+    system("pause");
+}
+*/
+
 
 
 void FinanceManager::addExpense() {

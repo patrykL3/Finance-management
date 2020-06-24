@@ -7,7 +7,7 @@ using namespace std;
 
 
 class CashFlow {
-
+protected:
     int userId;
     int date;
     float amount;
@@ -20,6 +20,9 @@ public:
         this -> date = date;
         this -> amount = amount;
         this -> item = item;
+    }
+    bool operator < (CashFlow& cashFlow) const {
+        return (date < cashFlow.getDate());
     }
 
     void setUserId(int newUserId);

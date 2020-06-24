@@ -12,6 +12,7 @@
 #include "FileWithExpenses.h"
 
 
+
 using namespace std;
 
 
@@ -24,10 +25,19 @@ class FinanceManager {
     FileWithExpenses fileWithExpenses;
     DateManager dateManager;
 
+
+
+
     Income provideDataOfNewIncome();
+    void displayDataIncome(Income income);
+    void displayDataExpense(Expense expense);
     int getNewIncomeId();
     Expense provideDataOfNewExpense();
     int getNewExpenseId();
+    string enterBeginBalanceDate();
+    string enterEndBalanceDate();
+    void displayBalance(float sumOfIncomes, float sumOfExpenses);
+    void displayBudgetBalanceForTheMonth(int yearOfTheBalanceMonth, int monthBalance);
 
 public:
 
@@ -43,6 +53,7 @@ public:
 
 
     void displayBudgetBalanceForTheCurrentMonth();
+    void displayBudgetBalanceForThePreviousMonth();
     void displayBudgetBalanceForThePeriod();
 };
 

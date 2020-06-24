@@ -1,5 +1,23 @@
 #include "DateManager.h"
 
+int DateManager::getYearFromIntDate(int date) {
+    int numberYear = 0;
+    string dateInStringFormat = AuxiliaryMethods::convertIntToString(date);
+    dateInStringFormat = dateInStringFormat.substr(0,4);
+    numberYear = AuxiliaryMethods::convertStringToInt(dateInStringFormat);
+
+    return numberYear;
+}
+
+
+int DateManager::getMonthFromIntDate(int date) {
+    int numberMonth = 0;
+    string dateInStringFormat = AuxiliaryMethods::convertIntToString(date);
+    dateInStringFormat = dateInStringFormat.substr(4,2);
+    numberMonth = AuxiliaryMethods::convertStringToInt(dateInStringFormat);
+
+    return numberMonth;
+}
 
 string DateManager::convertIntDateToStringDate(int date) {
     string convertedDate = AuxiliaryMethods::convertIntToString(date);
