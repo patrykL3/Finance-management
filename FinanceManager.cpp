@@ -52,57 +52,7 @@ string FinanceManager::enterEndBalanceDate() {
     return endBalanceDate;
 }
 
-void FinanceManager::displayBudgetBalanceForThePeriod() {
-    float sumOfIncomes = 0;
-    float sumOfExpenses = 0;
-    string beginBalanceDate = enterBeginBalanceDate();
-    string endBalanceDate = enterEndBalanceDate();
-
-    system("cls");
-    cout << "    >>> BILANS PRZYCHODOW / WYDATKOW <<<" << endl;
-    cout << "-----------------------------------------------" << endl << endl;
-    cout << " PRZYCHODY:" << endl << endl;
-    if (!incomes.empty()) {
-        sort(incomes.begin(), incomes.end());
-        for(int i = 0; i < incomes.size(); ++i) {
-            if(incomes[i].getDate() >=  dateManager.convertStringDateToIntDate(beginBalanceDate) && incomes[i].getDate() <=  dateManager.convertStringDateToIntDate(endBalanceDate)) {
-                displayDataIncome(incomes[i]);
-                sumOfIncomes += incomes[i].getAmount();
-            }
-        }
-    }
-    if(sumOfIncomes == 0) {
-        cout << " BRAK PRZYCHODOW." << endl << endl;
-    }
-    cout << "-----------------------------------------------" << endl << endl;
-    if (!expenses.empty()) {
-        sort(expenses.begin(), expenses.end());
-        cout << " WYDATKI:" << endl << endl;
-        for(int i = 0; i < expenses.size(); ++i) {
-            if(expenses[i].getDate() >=  dateManager.convertStringDateToIntDate(beginBalanceDate) && expenses[i].getDate() <=  dateManager.convertStringDateToIntDate(endBalanceDate)) {
-                displayDataExpense(expenses[i]);
-                sumOfExpenses += expenses[i].getAmount();
-            }
-        }
-    }
-
-    if(sumOfExpenses == 0) {
-        cout << " BRAK WYDATKOW." << endl << endl;
-    }
-
-    cout << "-----------------------------------------------" << endl << endl;
-    displayBalance(sumOfIncomes, sumOfExpenses);
-    cout << "-----------------------------------------------" << endl;
-    system("pause");
-}
-
-void FinanceManager::displayBudgetBalanceForTheMonth(int yearOfTheBalanceMonth, int monthBalance) {
-    float sumOfIncomes = 0;
-    float sumOfExpenses = 0;
-
-    system("cls");
-    cout << "    >>> BILANS PRZYCHODOW / WYDATKOW <<<" << endl;
-    cout << "-----------------------------------------------" << endl << endl;
+void FinanceManager::displayAndCalculateIncomesForTheMonth(float &sumOfIncomes, int yearOfTheBalanceMonth, int monthBalance) {
     if (!incomes.empty()) {
         sort(incomes.begin(), incomes.end());
         cout << " PRZYCHODY:" << endl << endl;
@@ -112,13 +62,13 @@ void FinanceManager::displayBudgetBalanceForTheMonth(int yearOfTheBalanceMonth, 
                 sumOfIncomes += incomes[i].getAmount();
             }
         }
-
     }
     if(sumOfIncomes == 0) {
         cout << " BRAK PRZYCHODOW." << endl << endl;
     }
-    cout << "-----------------------------------------------" << endl << endl;
+}
 
+void FinanceManager::displayAndCalculateExpensesForTheMonth(float &sumOfExpenses, int yearOfTheBalanceMonth, int monthBalance) {
     if (!expenses.empty()) {
         sort(expenses.begin(), expenses.end());
         cout << " WYDATKI:" << endl << endl;
@@ -132,6 +82,68 @@ void FinanceManager::displayBudgetBalanceForTheMonth(int yearOfTheBalanceMonth, 
     if(sumOfExpenses == 0) {
         cout << " BRAK WYDATKOW." << endl << endl;
     }
+}
+
+void FinanceManager::displayAndCalculateExpensesForThePeriod(float &sumOfExpenses, string beginBalanceDate, string endBalanceDate) {
+    if (!expenses.empty()) {
+        sort(expenses.begin(), expenses.end());
+        cout << " WYDATKI:" << endl << endl;
+        for(int i = 0; i < expenses.size(); ++i) {
+            if(expenses[i].getDate() >=  dateManager.convertStringDateToIntDate(beginBalanceDate) && expenses[i].getDate() <=  dateManager.convertStringDateToIntDate(endBalanceDate)) {
+                displayDataExpense(expenses[i]);
+                sumOfExpenses += expenses[i].getAmount();
+            }
+        }
+    }
+    if(sumOfExpenses == 0) {
+        cout << " BRAK WYDATKOW." << endl << endl;
+    }
+}
+
+void FinanceManager::displayAndCalculateIncomesForThePeriod(float &sumOfIncomes, string beginBalanceDate, string endBalanceDate) {
+    if (!incomes.empty()) {
+        sort(incomes.begin(), incomes.end());
+        cout << " PRZYCHODY:" << endl << endl;
+        for(int i = 0; i < incomes.size(); ++i) {
+            if(incomes[i].getDate() >=  dateManager.convertStringDateToIntDate(beginBalanceDate) && incomes[i].getDate() <=  dateManager.convertStringDateToIntDate(endBalanceDate)) {
+                displayDataIncome(incomes[i]);
+                sumOfIncomes += incomes[i].getAmount();
+            }
+        }
+    }
+    if(sumOfIncomes == 0) {
+        cout << " BRAK PRZYCHODOW." << endl << endl;
+    }
+}
+
+void FinanceManager::displayBudgetBalanceForThePeriod() {
+    float sumOfIncomes = 0;
+    float sumOfExpenses = 0;
+    string beginBalanceDate = enterBeginBalanceDate();
+    string endBalanceDate = enterEndBalanceDate();
+
+    system("cls");
+    cout << "    >>> BILANS PRZYCHODOW / WYDATKOW <<<" << endl;
+    cout << "-----------------------------------------------" << endl << endl;
+    displayAndCalculateIncomesForThePeriod(sumOfIncomes, beginBalanceDate, endBalanceDate);
+    cout << "-----------------------------------------------" << endl << endl;
+    displayAndCalculateExpensesForThePeriod(sumOfExpenses, beginBalanceDate, endBalanceDate);
+    cout << "-----------------------------------------------" << endl << endl;
+    displayBalance(sumOfIncomes, sumOfExpenses);
+    cout << "-----------------------------------------------" << endl;
+    system("pause");
+}
+
+void FinanceManager::displayBudgetBalanceForTheMonth(int yearOfTheBalanceMonth, int monthBalance) {
+    float sumOfIncomes = 0;
+    float sumOfExpenses = 0;
+
+    system("cls");
+    cout << "    >>> BILANS PRZYCHODOW / WYDATKOW <<<" << endl;
+    cout << "-----------------------------------------------" << endl << endl;
+    displayAndCalculateIncomesForTheMonth(sumOfIncomes, yearOfTheBalanceMonth, monthBalance);
+    cout << "-----------------------------------------------" << endl << endl;
+    displayAndCalculateExpensesForTheMonth(sumOfExpenses, yearOfTheBalanceMonth, monthBalance);
     cout << "-----------------------------------------------" << endl << endl;
     displayBalance(sumOfIncomes, sumOfExpenses);
     cout << "-----------------------------------------------" << endl;

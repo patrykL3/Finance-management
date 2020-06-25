@@ -33,6 +33,10 @@ class FinanceManager {
     string enterEndBalanceDate();
     void displayBalance(float sumOfIncomes, float sumOfExpenses);
     void displayBudgetBalanceForTheMonth(int yearOfTheBalanceMonth, int monthBalance);
+    void displayAndCalculateIncomesForTheMonth(float &sumOfIncomes, int yearOfTheBalanceMonth, int monthBalance);
+    void displayAndCalculateExpensesForTheMonth(float &sumOfIncomes, int yearOfTheBalanceMonth, int monthBalance);
+    void displayAndCalculateExpensesForThePeriod(float &sumOfExpenses, string beginBalanceDate, string endBalanceDate);
+    void displayAndCalculateIncomesForThePeriod(float &sumOfExpenses, string beginBalanceDate, string endBalanceDate);
 
 public:
 
