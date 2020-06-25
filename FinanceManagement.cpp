@@ -24,7 +24,6 @@ void FinanceManagement::displayBudgetBalanceForThePeriod() {
 
 }
 
-
 void FinanceManagement::changePasswordLoggedUser() {
     userManager.changePasswordLoggedUser();
 }
@@ -77,7 +76,7 @@ char FinanceManagement::selectOptionFromLoginMenu() {
     char choice;
 
     system("cls");
-    cout << "    >>> MENU  LOGOWANIA <<<" << endl;
+    cout << ">>> MENU LOGOWANIA <<<" << endl;
     cout << "---------------------------" << endl;
     cout << "1. Rejestracja" << endl;
     cout << "2. Logowanie" << endl;

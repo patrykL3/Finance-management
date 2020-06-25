@@ -2,7 +2,6 @@
 #define XML_FILE_H
 
 #include <iostream>
-#include <fstream>
 #include "Markup.h"
 
 using namespace std;
@@ -10,14 +9,12 @@ using namespace std;
 
 class XmlFile {
 
-protected:
-
     CMarkup cMarkupXml;
     const string FILE_NAME;
 
-   // bool isEmpty(fstream &xmlFile);
-   // void deleteFile(string fileName);
-   // void changeFileName(string oldName, string newName);
+protected:
+
+    XmlFile(string fileName) : FILE_NAME(fileName) {}
 
     void saveFile();
     void findElement();
@@ -33,8 +30,6 @@ protected:
     bool fileExists();
     bool elementExists(string tagName);
     string getChildData();
-
-    XmlFile(string fileName) : FILE_NAME(fileName) {}
 };
 
 

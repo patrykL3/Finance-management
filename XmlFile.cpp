@@ -56,27 +56,4 @@ void XmlFile::addElement(string tagName, int data) {
 bool XmlFile::fileExists() {
     return cMarkupXml.Load(FILE_NAME);
 }
-/*
-void XmlFile::deleteFile(string fileName) {
 
-    if (remove(fileName.c_str()) == 0) {}
-    else
-        cout << "Nie udalo sie usunac pliku " << fileName << endl;
-}
-
-void XmlFile::changeFileName(string oldName, string newName) {
-
-    if (rename(oldName.c_str(), newName.c_str()) == 0) {}
-    else
-        cout << "Nazwa pliku nie zostala zmieniona." << oldName << endl;
-}
-
-bool XmlFile::isEmpty(fstream &xmlFile) {
-
-    xmlFile.seekg(0, ios::end);
-    if (xmlFile.tellg() == 0)
-        return true;
-    else
-        return false;
-}
-*/

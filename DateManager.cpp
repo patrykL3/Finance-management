@@ -9,7 +9,6 @@ int DateManager::getYearFromIntDate(int date) {
     return numberYear;
 }
 
-
 int DateManager::getMonthFromIntDate(int date) {
     int numberMonth = 0;
     string dateInStringFormat = AuxiliaryMethods::convertIntToString(date);

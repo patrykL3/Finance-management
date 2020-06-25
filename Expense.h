@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "CashFlow.h"
+#include<algorithm>
 
 using namespace std;
 

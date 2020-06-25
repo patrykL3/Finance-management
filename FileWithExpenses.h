@@ -3,9 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include <fstream>
 #include <cstdlib>
-
 #include "Expense.h"
 #include "AuxiliaryMethods.h"
 #include "DateManager.h"

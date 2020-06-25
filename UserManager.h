@@ -3,9 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <windows.h>
-#include <fstream>
-#include <sstream>
 #include "FileWithUsers.h"
 #include "User.h"
 #include "AuxiliaryMethods.h"
@@ -35,7 +32,6 @@ public:
     bool isLogged();
     void userLogin();
     void userRegistration();
-    void displayAllUsers();
     void changePasswordLoggedUser();
     void logOutUser();
 };

@@ -71,9 +71,9 @@ vector<Income> FileWithIncomes::loadIncomesOfLoggedUserFromFile(int loggedUserId
         intoElement();
 
         while (elementExists("Income")) {
-               findChildElement("IncomeId");
-               incomeIDString = getChildData();
-                findChildElement("UserId");
+            findChildElement("IncomeId");
+            incomeIDString = getChildData();
+            findChildElement("UserId");
             if (getChildData() == AuxiliaryMethods::convertIntToString(loggedUserId)) {
                 income = getIncomeDataFromFileToConstructor();
                 incomes.push_back(income);

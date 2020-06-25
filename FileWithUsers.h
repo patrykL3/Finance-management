@@ -3,9 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include <fstream>
 #include <cstdlib>
-
 #include "User.h"
 #include "AuxiliaryMethods.h"
 #include "XmlFile.h"

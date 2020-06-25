@@ -60,32 +60,4 @@ string AuxiliaryMethods::loadLine() {
     getline(cin, inputData);
     return inputData;
 }
-/*
-int AuxiliaryMethods::wczytajLiczbeCalkowita() {
-    string wejscie = "";
-    int liczba = 0;
-
-    while (true) {
-        getline(cin, wejscie);
-
-        stringstream myStream(wejscie);
-        if (myStream >> liczba)
-            break;
-        cout << "To nie jest liczba. Wpisz ponownie. " << endl;
-    }
-    return liczba;
-}
-
-string AuxiliaryMethods::pobierzLiczbe(string tekst, int pozycjaZnaku) {
-    string liczba = "";
-    while(isdigit(tekst[pozycjaZnaku]) == true) {
-        liczba += tekst[pozycjaZnaku];
-        pozycjaZnaku ++;
-    }
-    return liczba;
-}
-
-
-
-*/
 
