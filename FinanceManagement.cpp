@@ -15,7 +15,7 @@ void FinanceManagement::displayBudgetBalanceForTheCurrentMonth() {
 }
 
 void FinanceManagement::displayBudgetBalanceForThePreviousMonth() {
-   financeManager -> displayBudgetBalanceForThePreviousMonth();
+    financeManager -> displayBudgetBalanceForThePreviousMonth();
 
 }
 
@@ -66,10 +66,7 @@ void FinanceManagement::userLogin() {
 }
 
 bool FinanceManagement::isLogged() {
-    if(userManager.getIdLoggedUser() == 0)
-        return false;
-    else
-        return true;
+    return (userManager.getIdLoggedUser() == 0) ? false : true;
 }
 
 char FinanceManagement::selectOptionFromLoginMenu() {

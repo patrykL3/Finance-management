@@ -23,10 +23,7 @@ void UserManager::changePasswordLoggedUser() {
 }
 
 bool UserManager::isLogged() {
-    if (userIdThatIsLoggedIn > 0)
-        return true;
-    else
-        return false;
+    return (userIdThatIsLoggedIn > 0)? true : false;
 }
 
 void UserManager::userLogin() {
@@ -107,10 +104,7 @@ User UserManager::provideDataOfNewUser() {
 }
 
 int UserManager::getNewUserId() {
-    if (users.empty() == true)
-        return 1;
-    else
-        return users.back().getId() + 1;
+    return (users.empty() == true)? 1 : users.back().getId() + 1;
 }
 
 bool UserManager::existLogin(string login) {
